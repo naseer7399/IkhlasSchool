@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ikhlas School Manager</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loginScreen" class="auth-screen">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="badge-mark" id="loginBadge">IS</div>
+      <h1 id="loginSchoolName">Ikhlas School Manager</h1>
+      <p>Student records, fees and accounts</p>
+    </div>
+
+    <div id="roleChoice">
+      <div class="role-options">
+        <button class="role-btn" id="btnTeacherLogin" type="button">
+          <span class="role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c0-3.6 3.4-6.5 7.5-6.5s7.5 2.9 7.5 6.5"/></svg></span>
+          <span class="role-text"><strong>Continue as teacher</strong><span>Add and look up student records</span></span>
+        </button>
+        <button class="role-btn" id="btnFeePayReveal" type="button">
+          <span class="role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg></span>
+          <span class="role-text"><strong>Fee Payments login</strong><span>Look up students and record fee payments</span></span>
+        </button>
+        <button class="role-btn mgmt" id="btnMgmtReveal" type="button">
+          <span class="role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5Z"/></svg></span>
+          <span class="role-text"><strong>Management login</strong><span>Full access including fees and accounts</span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="login-pw" id="mgmtPwWrap">
+      <form id="mgmtLoginForm">
+        <div class="field"><label for="mgmtPwInput" id="mgmtPwLabel">Management password</label><input type="password" id="mgmtPwInput" autocomplete="current-password"></div>
+        <p class="login-error" id="loginError"></p>
+        <div style="display:flex; gap:10px;">
+          <button type="button" class="login-back" id="mgmtLoginBack">Back</button>
+          <button type="submit" class="btn btn-primary" style="margin-left:auto;">Log in</button>
+        </div>
+      </form>
+    </div>
+    <p class="app-copyright" id="syncStatusLine"></p>
+    <p class="app-copyright">&copy; 2026 Naseer GitHub, Inc.</p>
+  </div>
+</div>
+
+<div id="cloudSignInScreen" class="auth-screen hidden">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="badge-mark" id="cloudBadge">IS</div>
+      <h1 id="cloudSchoolName">Ikhlas School Manager</h1>
+      <p>Sign in to sync with your school's shared data</p>
+    </div>
+    <form id="cloudSignInForm">
+      <div class="field"><label for="cloudEmail">Email</label><input type="email" id="cloudEmail" autocomplete="username"></div>
+      <div class="field"><label for="cloudPassword">Password</label><input type="password" id="cloudPassword" autocomplete="current-password"></div>
+      <p class="login-error" id="cloudSignInError"></p>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Sign in</button>
+    </form>
+    <p class="small-note" style="text-align:center;margin-top:14px;">Ask your school admin for this sign-in if you don't have one. This is separate from the Teacher / Fee Payments / Management access below.</p>
+    <p class="app-copyright">&copy; 2026 Naseer GitHub, Inc.</p>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <aside class="sidebar">
+    <div class="sidebar-brand" id="sidebarBrand"></div>
+    <nav class="nav" id="navList"></nav>
+    <div class="sidebar-footer" id="sidebarFooter"></div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><h2 id="topbarTitle">Dashboard</h2><div class="sub" id="topbarSub"></div></div>
+    </header>
+    <section class="content" id="content"></section>
+  </main>
+</div>
+
+<div id="modalRoot"></div>
+<div class="toast" id="toast"></div>
+
+<!-- Optional cloud sync: see firebase-config.js. Harmless to load even if unused. -->
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
