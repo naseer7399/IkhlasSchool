@@ -1,4 +1,4 @@
-# Ikhlas School Manager
+# Ikhlas School Manager ism-V1.5 Prod
 
 A student, fee and accounts management app built from your school database document. It runs as a **desktop app** (just open the file) and as a **cloud app** (host the same files on any web server).
 
