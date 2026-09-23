@@ -10,6 +10,9 @@ const SESSION_KEY = 'ikhlas_school_session_v1';
    Icons — small inline SVG set, stroke style, no external deps
    --------------------------------------------------------------- */
 const ICONS = {
+  whatsapp: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.33 4.99L2 22l5.2-1.36a9.94 9.94 0 0 0 4.82 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.52 2 12.02 2Zm0 18.2h-.01a8.24 8.24 0 0 1-4.2-1.15l-.3-.18-3.09.81.82-3.01-.2-.31a8.22 8.22 0 0 1-1.26-4.4c0-4.55 3.7-8.25 8.25-8.25 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.42 5.83c0 4.55-3.71 8.24-8.26 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.78.97-.14.17-.29.19-.53.06-.25-.12-1.04-.38-1.99-1.22-.73-.66-1.23-1.47-1.37-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.42-.14-.01-.31-.01-.48-.01-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.42 1.02 2.58.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>',
+  sms: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H7l-3 3z"/><path d="M8 9h8M8 12h5"/></svg>',
+  megaphone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a2 2 0 0 0 2 2h1l3.5 4.5V6.5L6 11H5a2 2 0 0 0-2 2Z"/><path d="M9.5 6.5 19 3v16l-9.5-3.5"/><path d="M19 9.5a3 3 0 0 1 0 5"/></svg>',
   dashboard: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
   students: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c0-3.6 3.4-6.5 7.5-6.5s7.5 2.9 7.5 6.5"/></svg>',
   fees: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13l3 3v13H4z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>',
@@ -30,7 +33,8 @@ const ICONS = {
   shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5Z"/></svg>',
   user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c0-3.6 3.4-6.5 7.5-6.5s7.5 2.9 7.5 6.5"/></svg>',
   empty: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M3 12h18M3 17h11"/></svg>',
-  alert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.5 17a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>'
+  alert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.5 17a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>',
+  bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 4.5 1.5 6 1.5 6h-15S6 12.5 6 8Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>'
 };
 
 /* ---------------------------------------------------------------
@@ -45,23 +49,24 @@ function seedData(){
       mgmtPassword: 'admin123',
       feePaymentsPassword: 'fees123',
       dataPassword: 'reset123',
+      countryCode: '91',
       logo: ''
     },
     students: [
-      { id:'101', name:'Aarav Kumar',  dob:'2012-05-14', gender:'Male',   class:'9',  section:'A', fatherName:'Ramesh Kumar', fatherAadhar:'2345 6789 0101', motherName:'Sunita Kumar', motherAadhar:'2345 6789 0102', studentAadhar:'2345 6789 0103', phone:'9876543210', address:'Vijayawada', admissionDate:'2026-06-01', status:'Active' },
-      { id:'102', name:'Ananya Rao',   dob:'2013-02-20', gender:'Female', class:'8',  section:'B', fatherName:'Suresh Rao',   fatherAadhar:'2345 6789 0201', motherName:'Lakshmi Rao', motherAadhar:'2345 6789 0202', studentAadhar:'2345 6789 0203', phone:'9876543211', address:'Hyderabad',  admissionDate:'2026-06-01', status:'Active' },
-      { id:'103', name:'Rahul Sharma', dob:'2011-11-02', gender:'Male',   class:'10', section:'A', fatherName:'Vinod Sharma', fatherAadhar:'2345 6789 0301', motherName:'Radha Sharma', motherAadhar:'2345 6789 0302', studentAadhar:'2345 6789 0303', phone:'9876543212', address:'Guntur',     admissionDate:'2026-06-01', status:'Active' },
-      { id:'104', name:'Sneha Reddy',  dob:'2012-08-09', gender:'Female', class:'9',  section:'B', fatherName:'Kiran Reddy',  fatherAadhar:'2345 6789 0401', motherName:'Padma Reddy', motherAadhar:'2345 6789 0402', studentAadhar:'2345 6789 0403', phone:'9876543213', address:'Vijayawada', admissionDate:'2026-06-01', status:'Active' },
-      { id:'105', name:'Arjun Patel',  dob:'2013-01-17', gender:'Male',   class:'8',  section:'A', fatherName:'Mahesh Patel', fatherAadhar:'2345 6789 0501', motherName:'Geeta Patel', motherAadhar:'2345 6789 0502', studentAadhar:'2345 6789 0503', phone:'9876543214', address:'Chennai',    admissionDate:'2026-06-01', status:'Active' },
-      { id:'106', name:'Meera Iyer',   dob:'2012-04-25', gender:'Female', class:'9',  section:'A', fatherName:'Ganesh Iyer',  fatherAadhar:'2345 6789 0601', motherName:'Kavitha Iyer', motherAadhar:'2345 6789 0602', studentAadhar:'2345 6789 0603', phone:'9876543215', address:'Vijayawada', admissionDate:'2026-06-05', status:'Active' }
+      { id:'101', name:'Aarav Kumar',  dob:'2012-05-14', gender:'Male',   class:'9',  section:'A', fatherName:'Ramesh Kumar', fatherAadhar:'2345 6789 0101', motherName:'Sunita Kumar', motherAadhar:'2345 6789 0102', studentAadhar:'2345 6789 0103', phone:'9876543210', address:'Vijayawada', admissionDate:'2026-06-01' },
+      { id:'102', name:'Ananya Rao',   dob:'2013-02-20', gender:'Female', class:'8',  section:'B', fatherName:'Suresh Rao',   fatherAadhar:'2345 6789 0201', motherName:'Lakshmi Rao', motherAadhar:'2345 6789 0202', studentAadhar:'2345 6789 0203', phone:'9876543211', address:'Hyderabad',  admissionDate:'2026-06-01' },
+      { id:'103', name:'Rahul Sharma', dob:'2011-11-02', gender:'Male',   class:'10', section:'A', fatherName:'Vinod Sharma', fatherAadhar:'2345 6789 0301', motherName:'Radha Sharma', motherAadhar:'2345 6789 0302', studentAadhar:'2345 6789 0303', phone:'9876543212', address:'Guntur',     admissionDate:'2026-06-01' },
+      { id:'104', name:'Sneha Reddy',  dob:'2012-08-09', gender:'Female', class:'9',  section:'B', fatherName:'Kiran Reddy',  fatherAadhar:'2345 6789 0401', motherName:'Padma Reddy', motherAadhar:'2345 6789 0402', studentAadhar:'2345 6789 0403', phone:'9876543213', address:'Vijayawada', admissionDate:'2026-06-01' },
+      { id:'105', name:'Arjun Patel',  dob:'2013-01-17', gender:'Male',   class:'8',  section:'A', fatherName:'Mahesh Patel', fatherAadhar:'2345 6789 0501', motherName:'Geeta Patel', motherAadhar:'2345 6789 0502', studentAadhar:'2345 6789 0503', phone:'9876543214', address:'Chennai',    admissionDate:'2026-06-01' },
+      { id:'106', name:'Meera Iyer',   dob:'2012-04-25', gender:'Female', class:'9',  section:'A', fatherName:'Ganesh Iyer',  fatherAadhar:'2345 6789 0601', motherName:'Kavitha Iyer', motherAadhar:'2345 6789 0602', studentAadhar:'2345 6789 0603', phone:'9876543215', address:'Vijayawada', admissionDate:'2026-06-05' }
     ],
     fees: [
-      { id:'F001', studentId:'101', year:'2026-27', type:'Tuition',   amount:25000, discount:0,    discountReason:'', dueDate:'2026-06-30' },
-      { id:'F002', studentId:'102', year:'2026-27', type:'Tuition',   amount:25000, discount:0,    discountReason:'', dueDate:'2026-06-30' },
-      { id:'F003', studentId:'103', year:'2026-27', type:'Tuition',   amount:28000, discount:0,    discountReason:'', dueDate:'2026-06-30' },
-      { id:'F004', studentId:'104', year:'2026-27', type:'Transport', amount:12000, discount:0,    discountReason:'', dueDate:'2026-07-15' },
-      { id:'F005', studentId:'105', year:'2026-27', type:'Tuition',   amount:25000, discount:0,    discountReason:'', dueDate:'2026-06-30' },
-      { id:'F006', studentId:'106', year:'2026-27', type:'Tuition',   amount:25000, discount:5000, discountReason:'Merit scholarship', dueDate:'2026-06-30' }
+      { id:'F001', studentId:'101', year:'2026-27', type:'Tuition',   amount:25000, discount:0,    discountReason:'' },
+      { id:'F002', studentId:'102', year:'2026-27', type:'Tuition',   amount:25000, discount:0,    discountReason:'' },
+      { id:'F003', studentId:'103', year:'2026-27', type:'Tuition',   amount:28000, discount:0,    discountReason:'' },
+      { id:'F004', studentId:'104', year:'2026-27', type:'Transport', amount:12000, discount:0,    discountReason:'' },
+      { id:'F005', studentId:'105', year:'2026-27', type:'Tuition',   amount:25000, discount:0,    discountReason:'' },
+      { id:'F006', studentId:'106', year:'2026-27', type:'Tuition',   amount:25000, discount:5000, discountReason:'Merit scholarship' }
     ],
     payments: [
       { id:'P001', feeId:'F001', studentId:'101', date:'2026-06-15', amount:25000, method:'Cash',          receipt:'R1001' },
@@ -91,6 +96,7 @@ function backfillDB(data){
   if(data.school && typeof data.school.logo === 'undefined') data.school.logo = '';
   if(data.school && typeof data.school.feePaymentsPassword === 'undefined') data.school.feePaymentsPassword = 'fees123';
   if(data.school && typeof data.school.dataPassword === 'undefined') data.school.dataPassword = 'reset123';
+  if(data.school && typeof data.school.countryCode === 'undefined') data.school.countryCode = '91';
   if(Array.isArray(data.students)){
     data.students.forEach(s => {
       if(typeof s.fatherName === 'undefined') s.fatherName = s.parent || '';
@@ -118,6 +124,7 @@ function saveDB(){
   localStorage.setItem(STORAGE_KEY, JSON.stringify(DB));
   if(cloudDocRef){
     cloudDocRef.set({ payload: JSON.stringify(DB), updatedAt: Date.now(), updatedBy: (cloudUser && cloudUser.email) || 'unknown' })
+      .then(() => syncParentPortal())
       .catch(err => { console.error('Cloud sync failed', err); toast('Saved locally, but could not sync to the cloud — check your connection.', true); });
   }
 }
@@ -203,6 +210,52 @@ function signOutOfCloud(){
 }
 
 /* ---------------------------------------------------------------
+   Parent Portal sync — pushes a per-student, parent-safe summary
+   (never Aadhaar numbers) to its own Firestore collection, plus a
+   shared school-branding doc, so the separate parent-app.md can log
+   a parent in with Admission No. + date of birth. See README.md >
+   "Parent Portal" for the Firestore collections and security rules
+   this depends on. A no-op unless cloud sync is on and signed in.
+   --------------------------------------------------------------- */
+function dobDigits(dob){ return String(dob || '').replace(/-/g, ''); }
+function parentDocId(student){ return `${student.id}__${dobDigits(student.dob)}`; }
+
+function syncParentPortal(){
+  if(!cloudDocRef || typeof firebase === 'undefined') return;
+  const fs = firebase.firestore();
+  const withDob = DB.students.filter(s => s.dob);
+  if(withDob.length){
+    const batch = fs.batch();
+    withDob.forEach(s => {
+      const fees = feesForStudent(s.id).map(f => {
+        const c = computeFee(f);
+        return { id:f.id, type:f.type, year:f.year, net:c.net, paid:c.paid, balance:c.balance, status:c.status };
+      });
+      const payments = DB.payments.filter(p => p.studentId === s.id).map(p => {
+        const fee = feeById(p.feeId);
+        return { date:p.date, amount:p.amount, method:p.method, receipt:p.receipt, feeType: fee ? fee.type : '' };
+      });
+      const ref = fs.collection('parent_portal').doc(parentDocId(s));
+      batch.set(ref, {
+        admissionNo: s.id, name: s.name, class: s.class, section: s.section || '', dob: s.dob,
+        fatherName: s.fatherName || '', motherName: s.motherName || '',
+        phone: s.phone || '', address: s.address || '', admissionDate: s.admissionDate || '',
+        fees, payments, updatedAt: Date.now()
+      });
+    });
+    batch.commit().catch(err => console.error('Parent portal sync failed', err));
+  }
+  fs.collection('parent_portal_meta').doc('school').set({
+    name: DB.school.name || '', address: DB.school.address || '',
+    phone: DB.school.phone || '', logo: DB.school.logo || '', countryCode: DB.school.countryCode || '91'
+  }).catch(err => console.error('Parent portal branding sync failed', err));
+}
+function deleteParentDoc(docId){
+  if(!cloudDocRef || typeof firebase === 'undefined' || !docId) return;
+  firebase.firestore().collection('parent_portal').doc(docId).delete().catch(() => {});
+}
+
+/* ---------------------------------------------------------------
    Helpers
    --------------------------------------------------------------- */
 function money(n){
@@ -252,6 +305,56 @@ function initials(name){
   return String(name || '?').trim().split(/\s+/).slice(0,2).map(w => w[0]).join('').toUpperCase();
 }
 
+/* ---------------------------------------------------------------
+   Messaging (WhatsApp / SMS) — click-to-send links.
+   No SMS/WhatsApp account, API key or backend is used or required:
+   these open the parent's already-installed WhatsApp or messaging
+   app with the text pre-filled, and a person still taps Send.
+   True one-click bulk sending with no human involved would need a
+   paid provider (e.g. WhatsApp Business API, Twilio, MSG91) wired
+   up through a server, which a static site like this cannot hold
+   credentials for safely.
+   --------------------------------------------------------------- */
+function toIntlPhone(phone){
+  const digits = String(phone||'').replace(/\D/g,'');
+  const cc = String((DB.school && DB.school.countryCode) || '91').replace(/\D/g,'');
+  if(!digits) return '';
+  if(digits.length > 10 && digits.startsWith(cc)) return digits;
+  if(digits.length === 10) return cc + digits;
+  return digits;
+}
+function waLink(phone, message){
+  const num = toIntlPhone(phone);
+  return `https://wa.me/${num}?text=${encodeURIComponent(message)}`;
+}
+function smsLink(phone, message){
+  const digits = String(phone||'').replace(/\D/g,'');
+  return `sms:${digits}?body=${encodeURIComponent(message)}`;
+}
+function openMessageLink(kind, phone, message){
+  if(!phone){ toast('This student has no phone number on file.', true); return; }
+  const url = kind === 'whatsapp' ? waLink(phone, message) : smsLink(phone, message);
+  window.open(url, '_blank');
+}
+function paymentMessageText(payment, fee, student, calc){
+  const lines = [
+    `Dear Parent,`,
+    ``,
+    `We have received a fee payment for ${student ? student.name : ''} (Admission No. ${payment.studentId}).`,
+    ``,
+    `Fee type: ${fee ? fee.type : '\u2014'}`,
+    `Amount paid: ${money(payment.amount)}`,
+    `Total fee: ${money(calc.net)}`,
+    `Balance due: ${money(calc.balance)}`,
+    `Receipt No: ${payment.receipt}`,
+    `Date: ${fmtDate(payment.date)}`,
+    ``,
+    `Thank you,`,
+    `${DB.school.name}`
+  ];
+  return lines.join('\n');
+}
+
 function isValidAadhar(v){
   const digits = String(v || '').replace(/\s/g, '');
   return digits === '' || /^\d{12}$/.test(digits);
@@ -276,10 +379,10 @@ function toast(msg, danger){
 }
 
 function can(action){
-  // management: everything. teacher: student data only (add/edit, no delete).
+  // management: everything. teacher: view + add student data only (no edit, no delete).
   // feepayments: view students + record/view payments, no editing or deleting either.
   if(SESSION.role === 'management') return true;
-  if(SESSION.role === 'teacher') return ['view-students','edit-students','add-students'].includes(action);
+  if(SESSION.role === 'teacher') return ['view-students','add-students'].includes(action);
   if(SESSION.role === 'feepayments') return ['view-students','add-payments','view-payments'].includes(action);
   return false;
 }
@@ -396,6 +499,7 @@ const NAV_ITEMS = [
   { id:'payments',  label:'Payments',  icon:'payments',   roles:['management','feepayments'] },
   { id:'accounts',  label:'Accounts',  icon:'accounts',   roles:['management'] },
   { id:'reports',   label:'Reports',   icon:'reports',    roles:['management','teacher'] },
+  { id:'notifications', label:'Notifications', icon:'bell', roles:['management'] },
   { id:'settings',  label:'Settings',  icon:'settings',   roles:['management'] }
 ];
 
@@ -419,7 +523,7 @@ function renderShell(){
     <div class="role-pill"><span class="dot"></span>${ROLE_LABELS[SESSION.role] || 'Guest'} access</div>
     ${cloudDocRef ? `<div class="role-pill" style="background:rgba(255,255,255,0.06);"><span class="dot" style="background:#2F8F5B;"></span>Cloud sync on</div>` : ''}
     <button class="nav-item" id="btnLogout">${ICONS.logout}<span>Log out</span></button>
-    <div class="app-copyright">\u00a9 2026 Naseer GitHub, Inc. ism-1.4.2v</div>`;
+    <div class="app-copyright">\u00a9 2026 Naseer all rights reserved.</div>`;
   document.querySelectorAll('.nav-item[data-tab]').forEach(btn => {
     btn.addEventListener('click', () => navigate(btn.dataset.tab));
   });
@@ -427,6 +531,7 @@ function renderShell(){
 }
 
 function navigate(tab, params){
+  if(notifHistoryUnsub && tab !== 'notifications'){ notifHistoryUnsub(); notifHistoryUnsub = null; }
   VIEW = { tab, params: params || {} };
   document.querySelectorAll('.nav-item[data-tab]').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.tab === tab);
@@ -439,6 +544,7 @@ function navigate(tab, params){
     payments: renderPayments,
     accounts: renderAccounts,
     reports: renderReports,
+    notifications: renderNotifications,
     settings: renderSettings
   };
   (renderers[tab] || renderDashboard)();
@@ -470,7 +576,7 @@ function renderDashboard(){
 
     setContent(`
       <div class="stat-grid">
-        <div class="stat-card"><div class="label">Students enrolled</div><div class="value">${DB.students.length}</div><div class="foot">${DB.students.filter(s=>s.status==='Active').length} active</div></div>
+        <div class="stat-card"><div class="label">Students enrolled</div><div class="value">${DB.students.length}</div></div>
         <div class="stat-card accent"><div class="label">Fees billed (2026-27)</div><div class="value">${money(totalBilled)}</div><div class="foot">${money(totalDiscount)} discounted</div></div>
         <div class="stat-card success"><div class="label">Collected</div><div class="value">${money(totalCollected)}</div><div class="foot">${DB.payments.length} payments recorded</div></div>
         <div class="stat-card danger"><div class="label">Pending balance</div><div class="value">${money(totalPending)}</div><div class="foot">${feeCalcs.filter(x=>x.calc.status!=='Paid').length} fee records outstanding</div></div>
@@ -516,7 +622,6 @@ function renderDashboard(){
     setContent(`
       <div class="stat-grid">
         <div class="stat-card"><div class="label">Total students</div><div class="value">${DB.students.length}</div></div>
-        <div class="stat-card success"><div class="label">Active</div><div class="value">${DB.students.filter(s=>s.status==='Active').length}</div></div>
         <div class="stat-card accent"><div class="label">Classes</div><div class="value">${classes.length}</div></div>
       </div>
       <div class="panel">
@@ -540,7 +645,7 @@ function wireNavShortcuts(){
 /* ---------------------------------------------------------------
    Students
    --------------------------------------------------------------- */
-let studentFilter = { q:'', class:'', status:'' };
+let studentFilter = { q:'', class:'' };
 
 function renderStudents(){
   setTopbar('Students', 'Add, update and look up student records');
@@ -558,9 +663,9 @@ function renderStudentsShell(){
         <div class="toolbar">
           <div class="search-input">${ICONS.search}<input type="text" id="studentSearch" placeholder="Search by name or admission no." value="${esc(studentFilter.q)}" style="width:240px"></div>
           <select id="filterClass" style="width:140px"><option value="">All classes</option>${classes.map(c=>`<option ${studentFilter.class===c?'selected':''} value="${c}">Class ${c}</option>`).join('')}</select>
-          <select id="filterStatus" style="width:140px"><option value="">All statuses</option><option ${studentFilter.status==='Active'?'selected':''}>Active</option><option ${studentFilter.status==='Inactive'?'selected':''}>Inactive</option></select>
         </div>
         <button class="btn" id="btnPrintStudents">${ICONS.print}Print</button>
+        <button class="btn" id="btnAnnouncement">${ICONS.megaphone}Announcement</button>
         ${canAdd ? `<button class="btn btn-primary" id="btnAddStudent">${ICONS.plus}Add student</button>` : ''}
       </div>
       <div class="panel-body pad0" id="studentsTableArea"></div>
@@ -568,8 +673,8 @@ function renderStudentsShell(){
   `);
   document.getElementById('studentSearch').addEventListener('input', e => { studentFilter.q = e.target.value; renderStudentsTable(); });
   document.getElementById('filterClass').addEventListener('change', e => { studentFilter.class = e.target.value; renderStudentsTable(); });
-  document.getElementById('filterStatus').addEventListener('change', e => { studentFilter.status = e.target.value; renderStudentsTable(); });
   document.getElementById('btnPrintStudents').addEventListener('click', () => printContainer('Student list'));
+  document.getElementById('btnAnnouncement').addEventListener('click', () => openAnnouncementModal());
   const addBtn = document.getElementById('btnAddStudent');
   if(addBtn) addBtn.addEventListener('click', () => openStudentModal());
   renderStudentsTable();
@@ -583,31 +688,36 @@ function renderStudentsTable(){
     const q = studentFilter.q.trim().toLowerCase();
     const matchQ = !q || s.name.toLowerCase().includes(q) || s.id.toLowerCase().includes(q);
     const matchC = !studentFilter.class || s.class === studentFilter.class;
-    const matchS = !studentFilter.status || s.status === studentFilter.status;
-    return matchQ && matchC && matchS;
+    return matchQ && matchC;
   });
   const area = document.getElementById('studentsTableArea');
   if(!area) return;
+  const headCols = `<th>Admission No.</th><th>Name</th><th>Class &amp; Section</th><th>Date of birth</th><th>Student's Aadhaar</th><th>Father's name</th><th>Father's Aadhaar</th><th>Mother's name</th><th>Mother's Aadhaar</th><th>Phone</th><th></th>`;
   area.innerHTML = list.length ? `<div class="table-wrap"><table>
-      <thead><tr><th>Admission No.</th><th>Name</th><th>Class</th><th>Section</th><th>Father's name</th><th>Phone</th><th>Status</th><th></th></tr></thead>
+      <thead><tr>${headCols}</tr></thead>
       <tbody>
         ${list.map(s => `<tr>
           <td>${esc(s.id)}</td>
           <td>${esc(s.name)}</td>
-          <td>${esc(s.class)}</td>
-          <td>${esc(s.section)}</td>
+          <td>${esc(s.class)}${s.section ? ('-' + esc(s.section)) : ''}</td>
+          <td>${fmtDate(s.dob)}</td>
+          <td>${esc(s.studentAadhar)||'\u2014'}</td>
           <td>${esc(s.fatherName)}</td>
+          <td>${esc(s.fatherAadhar)||'\u2014'}</td>
+          <td>${esc(s.motherName)||'\u2014'}</td>
+          <td>${esc(s.motherAadhar)||'\u2014'}</td>
           <td>${esc(s.phone)}</td>
-          <td><span class="tag ${s.status==='Active'?'tag-active':'tag-inactive'}">${s.status}</span></td>
           <td><div class="row-actions">
             <button class="btn btn-sm btn-ghost" data-view="${s.id}" title="View profile">${ICONS.eye}</button>
+            <button class="btn btn-sm btn-ghost" data-msg="${s.id}" title="Message parent">${ICONS.whatsapp}</button>
             ${canEdit ? `<button class="btn btn-sm btn-ghost" data-edit="${s.id}" title="Edit">${ICONS.edit}</button>` : ''}
             ${canDelete ? `<button class="btn btn-sm btn-ghost" data-del="${s.id}" title="Delete">${ICONS.trash}</button>` : ''}
           </div></td>
         </tr>`).join('')}
       </tbody>
-    </table></div>` : `<div class="empty-state">${ICONS.students}<h3>No students match this search</h3><p>Try a different name, admission no., class or status.</p></div>`;
+    </table></div>` : `<div class="empty-state">${ICONS.students}<h3>No students match this search</h3><p>Try a different name, admission no. or class.</p></div>`;
   document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => navigate('student-profile', { id:b.dataset.view })));
+  document.querySelectorAll('[data-msg]').forEach(b => b.addEventListener('click', () => openIndividualMessageModal(b.dataset.msg)));
   document.querySelectorAll('[data-edit]').forEach(b => b.addEventListener('click', () => openStudentModal(b.dataset.edit)));
   document.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => confirmDeleteStudent(b.dataset.del)));
 }
@@ -652,7 +762,6 @@ function openStudentModal(id){
         <div class="field"><label>Admission date</label><input type="date" id="f_admission" value="${editing?editing.admissionDate:new Date().toISOString().slice(0,10)}"></div>
       </div>
       <div class="field"><label>Address</label><input type="text" id="f_address" value="${esc(editing?editing.address:'')}"></div>
-      <div class="field"><label>Status</label><select id="f_status"><option ${editing&&editing.status==='Active'?'selected':''}>Active</option><option ${editing&&editing.status==='Inactive'?'selected':''}>Inactive</option></select></div>
     `,
     confirmLabel: editing ? 'Save changes' : 'Add student',
     onConfirm: () => {
@@ -693,9 +802,9 @@ function openStudentModal(id){
         motherAadhar: formatAadhar(motherAadhar),
         phone: document.getElementById('f_phone').value.trim(),
         address: document.getElementById('f_address').value.trim(),
-        admissionDate: document.getElementById('f_admission').value,
-        status: document.getElementById('f_status').value
+        admissionDate: document.getElementById('f_admission').value
       };
+      const oldParentDocId = (editing && editing.dob) ? parentDocId(editing) : null;
       if(editing){
         Object.assign(editing, rec);
         toast('Student updated.');
@@ -704,6 +813,8 @@ function openStudentModal(id){
         toast('Student added.');
       }
       saveDB();
+      const newParentDocId = rec.dob ? parentDocId(rec) : null;
+      if(oldParentDocId && oldParentDocId !== newParentDocId) deleteParentDoc(oldParentDocId);
       if(VIEW.tab === 'student-profile') renderStudentProfile(); else renderStudentsShell();
       return true;
     }
@@ -715,6 +826,17 @@ function confirmDeleteStudent(id){
   const s = studentById(id);
   if(!s) return;
   const hasFees = DB.fees.some(f => f.studentId === id);
+  const outstandingBalance = feesForStudent(id).reduce((sum,f) => sum + computeFee(f).balance, 0);
+  if(outstandingBalance > 0){
+    openModal({
+      title: 'Cannot delete student',
+      body: `<div class="modal-note danger">${ICONS.alert}${esc(s.name)} (${esc(s.id)}) has an outstanding fee balance of ${money(outstandingBalance)}. Clear all dues before deleting this student.</div>`,
+      confirmLabel: 'OK',
+      extraButtons: [],
+      onConfirm: () => true
+    });
+    return;
+  }
   openModal({
     title: 'Delete student?',
     body: `<div class="modal-note danger">${ICONS.alert}This removes ${esc(s.name)} (${esc(s.id)}) permanently.</div>
@@ -722,8 +844,10 @@ function confirmDeleteStudent(id){
     confirmLabel: 'Delete student',
     danger: true,
     onConfirm: () => {
+      const oldParentDocId = s.dob ? parentDocId(s) : null;
       DB.students = DB.students.filter(x => x.id !== id);
       saveDB();
+      if(oldParentDocId) deleteParentDoc(oldParentDocId);
       toast('Student deleted.');
       navigate('students');
       return true;
@@ -755,7 +879,7 @@ function renderStudentProfile(){
           <div class="profile-avatar">${initials(s.name)}</div>
           <div class="profile-info">
             <h3>${esc(s.name)}</h3>
-            <div class="meta">${esc(s.gender)} \u00b7 Born ${fmtDate(s.dob)} \u00b7 Admitted ${fmtDate(s.admissionDate)} \u00b7 <span class="tag ${s.status==='Active'?'tag-active':'tag-inactive'}">${s.status}</span></div>
+            <div class="meta">${esc(s.gender)} \u00b7 Born ${fmtDate(s.dob)} \u00b7 Admitted ${fmtDate(s.admissionDate)}</div>
           </div>
           <div style="margin-left:auto; display:flex; gap:8px;">
             <button class="btn btn-sm" id="btnPrintProfile">${ICONS.print}Print</button>
@@ -778,6 +902,14 @@ function renderStudentProfile(){
     </div>
 
     ${SESSION.role === 'management' ? `
+    <div class="panel">
+      <div class="panel-body">
+        <div class="section-title" style="margin:0 0 8px;">Parent app access</div>
+        ${s.dob
+          ? `<p class="small-note">Share these with the parent to sign in to the Parent Portal app: <b>Admission No. ${esc(s.id)}</b> and <b>date of birth ${fmtDate(s.dob)}</b>.</p>`
+          : `<p class="small-note" style="color:var(--danger);">${ICONS.alert} This student has no date of birth on file, so the Parent Portal app can't create a login for them yet. Add one from Edit.</p>`}
+      </div>
+    </div>
     <div class="stat-grid">
       <div class="stat-card"><div class="label">Total billed</div><div class="value">${money(totals.net)}</div></div>
       <div class="stat-card success"><div class="label">Paid</div><div class="value">${money(totals.paid)}</div></div>
@@ -816,7 +948,7 @@ function renderStudentProfile(){
 let feeFilter = { q:'', status:'' };
 
 function renderFees(){
-  setTopbar('Fee structure', 'Set fee amounts, discounts and due dates per student');
+  setTopbar('Fee structure', 'Set fee amounts and discounts per student');
   renderFeesShell();
 }
 function renderFeesShell(){
@@ -850,7 +982,7 @@ function renderFeesTable(){
   const area = document.getElementById('feesTableArea');
   if(!area) return;
   area.innerHTML = list.length ? `<div class="table-wrap"><table>
-      <thead><tr><th>Fee ID</th><th>Student</th><th>Type</th><th class="num">Amount</th><th class="num">Discount</th><th class="num">Net</th><th class="num">Balance</th><th>Due</th><th>Status</th><th></th></tr></thead>
+      <thead><tr><th>Fee ID</th><th>Student</th><th>Type</th><th class="num">Amount</th><th class="num">Discount</th><th class="num">Net</th><th class="num">Balance</th><th>Status</th><th></th></tr></thead>
       <tbody>${list.map(({fee:f, calc:c}) => `<tr>
         <td>${esc(f.id)}</td>
         <td>${esc(studentName(f.studentId))}</td>
@@ -859,7 +991,6 @@ function renderFeesTable(){
         <td class="num">${f.discount ? money(f.discount) : '\u2014'}</td>
         <td class="num">${money(c.net)}</td>
         <td class="num">${money(c.balance)}</td>
-        <td>${fmtDate(f.dueDate)}</td>
         <td>${tagForStatus(c.status)}</td>
         <td><div class="row-actions">
           <button class="btn btn-sm btn-ghost" data-edit="${f.id}" title="Edit">${ICONS.edit}</button>
@@ -869,6 +1000,107 @@ function renderFeesTable(){
     </table></div>` : `<div class="empty-state">${ICONS.fees}<h3>No fee records match this search</h3></div>`;
   document.querySelectorAll('[data-edit]').forEach(b => b.addEventListener('click', () => openFeeModal(b.dataset.edit)));
   document.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => confirmDeleteFee(b.dataset.del)));
+}
+
+function openIndividualMessageModal(studentId){
+  const s = studentById(studentId);
+  if(!s) return;
+  const defaultMsg = `Dear Parent,\n\nThis is a message from ${DB.school.name} regarding ${s.name} (Admission No. ${s.id}).\n\n\n\nRegards,\n${DB.school.name}`;
+  openModal({
+    title: `Message ${s.name}'s parent`,
+    body: `
+      ${s.phone ? '' : `<div class="modal-note danger">${ICONS.alert}No phone number is on file for this student. Add one from Edit before sending.</div>`}
+      <p class="field-help" style="margin-bottom:8px;">Sending to ${s.phone ? esc(s.phone) : '\u2014'}</p>
+      <textarea id="im_text" rows="9" style="width:100%;font-family:inherit;font-size:13px;padding:10px;border:1px solid var(--line-strong);border-radius:var(--radius-ctrl);resize:vertical;">${esc(defaultMsg)}</textarea>
+    `,
+    confirmLabel: 'Done',
+    onConfirm: () => true,
+    extraButtons: [
+      { label: 'Send WhatsApp', className: 'btn-accent', icon: ICONS.whatsapp, onClick: () => { openMessageLink('whatsapp', s.phone, document.getElementById('im_text').value); } },
+      { label: 'Send SMS', className: '', icon: ICONS.sms, onClick: () => { openMessageLink('sms', s.phone, document.getElementById('im_text').value); } },
+    ],
+  });
+}
+
+function openAnnouncementModal(){
+  const classes = [...new Set(DB.students.map(s => s.class))].sort((a,b)=>Number(a)-Number(b));
+  const rowsHtml = DB.students.map(s => `
+    <label style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid var(--line);">
+      <input type="checkbox" class="ann-check" value="${esc(s.id)}" data-class="${esc(s.class)}" checked>
+      <span style="flex:1;">${esc(s.name)} <span class="small-note">(Class ${esc(s.class)}${s.section?('-'+esc(s.section)):''})</span></span>
+      <span class="small-note">${s.phone?esc(s.phone):'no phone on file'}</span>
+    </label>`).join('');
+  openModal({
+    title: 'Send an announcement',
+    body: `
+      <div class="field-row">
+        <div class="field"><label>Send to</label>
+          <select id="ann_group">
+            <option value="all">All students (${DB.students.length})</option>
+            ${classes.map(c => `<option value="class:${esc(c)}">Class ${esc(c)} only</option>`).join('')}
+          </select>
+        </div>
+        <div class="field"><label>Send via</label>
+          <select id="ann_channel"><option value="whatsapp">WhatsApp</option><option value="sms">SMS</option></select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Message</label>
+        <textarea id="ann_message" rows="6" style="width:100%;font-family:inherit;font-size:13px;padding:10px;border:1px solid var(--line-strong);border-radius:var(--radius-ctrl);resize:vertical;" placeholder="Type your announcement here."></textarea>
+        <p class="field-help">Tip: include {name} anywhere in the message to personalize it with each student's name.</p>
+      </div>
+      <div class="field">
+        <label>Recipients \u2014 untick anyone to skip them</label>
+        <div id="ann_list" style="max-height:220px;overflow-y:auto;border:1px solid var(--line-strong);border-radius:var(--radius-ctrl);padding:4px 10px;">${rowsHtml}</div>
+      </div>
+    `,
+    confirmLabel: 'Continue',
+    onConfirm: () => {
+      const message = document.getElementById('ann_message').value.trim();
+      if(!message){ toast('Write a message first.', true); return false; }
+      const channel = document.getElementById('ann_channel').value;
+      const selected = [...document.querySelectorAll('.ann-check:checked')].map(el => el.value);
+      if(!selected.length){ toast('Select at least one recipient.', true); return false; }
+      setTimeout(() => openAnnouncementSendList(selected, message, channel), 50);
+      return true;
+    }
+  });
+  document.getElementById('ann_group').addEventListener('change', (e) => {
+    const val = e.target.value;
+    document.querySelectorAll('.ann-check').forEach(chk => {
+      chk.checked = (val === 'all') || (chk.dataset.class === val.split(':')[1]);
+    });
+  });
+}
+
+function openAnnouncementSendList(ids, message, channel){
+  const rows = ids.map(id => {
+    const s = studentById(id);
+    const hasPhone = s && s.phone;
+    return `<div class="ann-send-row" style="display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid var(--line);">
+      <span style="flex:1;">${esc(s?s.name:id)}<br><span class="small-note">${hasPhone?esc(s.phone):'No phone on file'}</span></span>
+      <button class="btn btn-sm ${channel==='whatsapp'?'btn-accent':''}" data-ann-send="${esc(id)}" ${hasPhone?'':'disabled'}>${channel==='whatsapp'?ICONS.whatsapp:ICONS.sms} Send</button>
+    </div>`;
+  }).join('');
+  openModal({
+    title: `Send to ${ids.length} recipient${ids.length>1?'s':''}`,
+    body: `<p class="small-note" style="margin-bottom:12px;">Browsers only open one message at a time, so click Send for each parent \u2014 it opens ${channel==='whatsapp'?'WhatsApp':'your SMS app'} with the message already filled in; you just tap send there.</p>
+      <div style="max-height:320px;overflow-y:auto;">${rows}</div>`,
+    confirmLabel: 'Close',
+    onConfirm: () => true,
+  });
+  document.querySelectorAll('[data-ann-send]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.annSend;
+      const s = studentById(id);
+      const personalized = message.replace(/\{name\}/gi, s ? s.name : '');
+      openMessageLink(channel, s ? s.phone : '', personalized);
+      btn.innerHTML = '\u2713 Sent';
+      btn.disabled = true;
+      btn.classList.remove('btn-accent');
+      btn.classList.add('btn-ghost');
+    });
+  });
 }
 
 function openFeeModal(id, presetStudentId){
@@ -908,12 +1140,9 @@ function openFeeModal(id, presetStudentId){
       </div>
       <div class="field-row">
         <div class="field"><label>Amount (\u20B9)</label><input type="number" id="f_amount" min="0" value="${editing?editing.amount:''}" placeholder="25000"></div>
-        <div class="field"><label>Due date</label><input type="date" id="f_due" value="${editing?editing.dueDate:''}"></div>
-      </div>
-      <div class="field-row">
         <div class="field"><label>Discount (\u20B9) \u2014 for special/scholarship students</label><input type="number" id="f_discount" min="0" value="${editing?editing.discount:0}"></div>
-        <div class="field"><label>Discount reason</label><input type="text" id="f_reason" value="${esc(editing?editing.discountReason:'')}" placeholder="Merit scholarship, staff ward, sibling discount"></div>
       </div>
+      <div class="field"><label>Discount reason</label><input type="text" id="f_reason" value="${esc(editing?editing.discountReason:'')}" placeholder="Merit scholarship, staff ward, sibling discount"></div>
       ${editing ? `<p class="small-note">Net amount, amount paid and balance update automatically from recorded payments.</p>` : ''}
     `,
     confirmLabel: editing ? 'Save changes' : 'Add fee record',
@@ -935,8 +1164,7 @@ function openFeeModal(id, presetStudentId){
         year: document.getElementById('f_year').value.trim(),
         type: feeType,
         amount, discount,
-        discountReason: document.getElementById('f_reason').value.trim(),
-        dueDate: document.getElementById('f_due').value
+        discountReason: document.getElementById('f_reason').value.trim()
       };
       if(editing){
         Object.assign(editing, rec);
@@ -1016,7 +1244,7 @@ function renderPaymentsShell(){
 }
 function renderPaymentsTable(){
   const canDelete = SESSION.role === 'management';
-  let list = [...DB.payments].sort((a,b) => b.date.localeCompare(a.date)).filter(p => {
+  let list = [...DB.payments].sort((a,b) => b.receipt.localeCompare(a.receipt, undefined, {numeric:true, sensitivity:'base'})).filter(p => {
     const q = paymentFilter.q.trim().toLowerCase();
     return !q || studentName(p.studentId).toLowerCase().includes(q) || p.receipt.toLowerCase().includes(q) || p.id.toLowerCase().includes(q);
   });
@@ -1033,16 +1261,53 @@ function renderPaymentsTable(){
         <td>${esc(p.method)}</td>
         <td><div class="row-actions">
           <button class="btn btn-sm btn-ghost" data-receipt="${p.id}" title="Print receipt">${ICONS.print}</button>
+          <button class="btn btn-sm btn-ghost" data-wa-payment="${p.id}" title="Send WhatsApp confirmation">${ICONS.whatsapp}</button>
+          <button class="btn btn-sm btn-ghost" data-sms-payment="${p.id}" title="Send SMS confirmation">${ICONS.sms}</button>
           ${canDelete ? `<button class="btn btn-sm btn-ghost" data-del="${p.id}" title="Delete">${ICONS.trash}</button>` : ''}
         </div></td>
       </tr>`; }).join('')}</tbody>
     </table></div>` : `<div class="empty-state">${ICONS.payments}<h3>No payments recorded yet</h3><p>Record a payment against a fee to see it here.</p></div>`;
   document.querySelectorAll('[data-receipt]').forEach(b => b.addEventListener('click', () => printReceipt(b.dataset.receipt)));
+  document.querySelectorAll('[data-wa-payment]').forEach(b => b.addEventListener('click', () => sendPaymentMessage(b.dataset.waPayment, 'whatsapp')));
+  document.querySelectorAll('[data-sms-payment]').forEach(b => b.addEventListener('click', () => sendPaymentMessage(b.dataset.smsPayment, 'sms')));
   document.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => confirmDeletePayment(b.dataset.del)));
 }
 
+function promptSendPaymentMessage(paymentId){
+  const p = DB.payments.find(x => x.id === paymentId);
+  if(!p) return;
+  const s = studentById(p.studentId);
+  if(!s || !s.phone) return;
+  const f = feeById(p.feeId);
+  const calc = f ? computeFee(f) : { net:p.amount, balance:0 };
+  const message = paymentMessageText(p, f, s, calc);
+  openModal({
+    title: 'Send a payment confirmation?',
+    body: `
+      <p class="small-note" style="margin-bottom:14px;">Let ${esc(s.name)}'s parent know this payment was received, with the fee type and balance included.</p>
+      <textarea id="pm_preview" rows="9" style="width:100%;font-family:inherit;font-size:13px;padding:10px;border:1px solid var(--line-strong);border-radius:var(--radius-ctrl);resize:vertical;">${esc(message)}</textarea>
+    `,
+    confirmLabel: 'Done',
+    onConfirm: () => true,
+    extraButtons: [
+      { label: 'Send WhatsApp', className: 'btn-accent', icon: ICONS.whatsapp, onClick: () => { openMessageLink('whatsapp', s.phone, document.getElementById('pm_preview').value); } },
+      { label: 'Send SMS', className: '', icon: ICONS.sms, onClick: () => { openMessageLink('sms', s.phone, document.getElementById('pm_preview').value); } },
+    ],
+  });
+}
+
+function sendPaymentMessage(paymentId, kind){
+  const p = DB.payments.find(x => x.id === paymentId);
+  if(!p) return;
+  const f = feeById(p.feeId);
+  const s = studentById(p.studentId);
+  const calc = f ? computeFee(f) : { net:p.amount, balance:0 };
+  const message = paymentMessageText(p, f, s, calc);
+  openMessageLink(kind, s ? s.phone : '', message);
+}
+
 function openPaymentModal(){
-  if(!DB.fees.length){ toast('Add a fee record first.', true); return; }
+  if(!DB.fees.length && !DB.students.length){ toast('Add a student first.', true); return; }
   openModal({
     title: 'Record a payment',
     body: `
@@ -1068,6 +1333,7 @@ function openPaymentModal(){
           <input type="hidden" id="p_fee">
           <div class="searchable-select-list" id="p_feeList"></div>
         </div>
+        <p class="small-note" id="p_otherNote" style="display:none;">For "Other", pick the student directly \u2014 you don't need an existing fee record. Enter the fee type above and it will be recorded as a new one-off charge.</p>
       </div>
       <div class="field-row">
         <div class="field"><label>Payment date</label><input type="date" id="p_date" value="${new Date().toISOString().slice(0,10)}"></div>
@@ -1081,17 +1347,32 @@ function openPaymentModal(){
     `,
     confirmLabel: 'Record payment',
     onConfirm: () => {
-      const feeId = document.getElementById('p_fee').value;
+      const selected = document.getElementById('p_fee').value;
       const errEl = document.getElementById('p_error');
-      if(!feeId){ errEl.style.display='block'; errEl.textContent = 'Choose a student / fee to pay towards.'; return false; }
+      const typeFilter = document.getElementById('p_feeTypeFilter').value;
+      const customType = document.getElementById('p_feeTypeOther').value.trim();
+      if(!selected){ errEl.style.display='block'; errEl.textContent = 'Choose a student / fee to pay towards.'; return false; }
       const amount = Number(document.getElementById('p_amount').value);
-      const f = feeById(feeId);
-      const c = computeFee(f);
       if(!amount || amount <= 0){ errEl.style.display='block'; errEl.textContent = 'Enter an amount greater than zero.'; return false; }
-      if(amount > c.balance){ errEl.style.display='block'; errEl.textContent = `Amount exceeds the remaining balance of ${money(c.balance)}.`; return false; }
+
+      let f;
+      if(selected.indexOf('student:') === 0){
+        // "Other" fee type with no existing fee record: create the charge on the fly.
+        if(typeFilter !== 'Other' || !customType){ errEl.style.display='block'; errEl.textContent = 'Enter the fee type for this "Other" charge.'; return false; }
+        const studentId = selected.slice('student:'.length);
+        if(!studentById(studentId)){ errEl.style.display='block'; errEl.textContent = 'Choose a student / fee to pay towards.'; return false; }
+        f = { id: nextId('F', DB.fees, 3), studentId, year:'2026-27', type: customType, amount, discount:0, discountReason:'' };
+        DB.fees.push(f);
+      }else{
+        f = feeById(selected);
+        if(!f){ errEl.style.display='block'; errEl.textContent = 'Choose a student / fee to pay towards.'; return false; }
+        const c = computeFee(f);
+        if(amount > c.balance){ errEl.style.display='block'; errEl.textContent = `Amount exceeds the remaining balance of ${money(c.balance)}.`; return false; }
+      }
+
       const rec = {
         id: nextId('P', DB.payments, 3),
-        feeId,
+        feeId: f.id,
         studentId: f.studentId,
         date: document.getElementById('p_date').value,
         amount,
@@ -1102,6 +1383,7 @@ function openPaymentModal(){
       saveDB();
       toast('Payment recorded.');
       if(VIEW.tab === 'student-profile') renderStudentProfile(); else renderPaymentsTable();
+      setTimeout(() => promptSendPaymentMessage(rec.id), 200);
       return true;
     }
   });
@@ -1126,12 +1408,26 @@ function openPaymentModal(){
     });
     feeItems.length = 0;
     feeItems.push(...filtered);
+    if(typeFilter === 'Other'){
+      // Let management pick a student directly and record a one-off "Other" charge
+      // even when no fee record exists for them yet.
+      DB.students.forEach(s => {
+        feeItems.push({
+          value: `student:${s.id}`,
+          label: `${s.name} \u2014 new "Other" charge`,
+          sub: `Admission No. ${s.id}${customType ? ' \u00b7 ' + document.getElementById('p_feeTypeOther').value.trim() : ' \u00b7 enter fee type above'}`,
+          searchText: `${s.name} ${s.id}`.toLowerCase()
+        });
+      });
+    }
   }
   buildFeeItems();
   initSearchableSelect('p_feeInput', 'p_feeList', 'p_fee', feeItems);
 
   document.getElementById('p_feeTypeFilter').addEventListener('change', (e) => {
-    document.getElementById('p_feeTypeOtherWrap').style.display = e.target.value === 'Other' ? 'block' : 'none';
+    const isOther = e.target.value === 'Other';
+    document.getElementById('p_feeTypeOtherWrap').style.display = isOther ? 'block' : 'none';
+    document.getElementById('p_otherNote').style.display = isOther ? 'block' : 'none';
     buildFeeItems();
     document.getElementById('p_feeInput').value = '';
     document.getElementById('p_fee').value = '';
@@ -1388,11 +1684,11 @@ function paintReportBody(){
   if(reportTab === 'pending'){
     const rows = DB.fees.map(f => ({fee:f, calc:computeFee(f)})).filter(x => x.calc.status !== 'Paid').sort((a,b)=>b.calc.balance-a.calc.balance);
     el.innerHTML = `<div class="panel"><div class="panel-body pad0">
-      ${rows.length ? `<div class="table-wrap"><table><thead><tr><th>Student</th><th>Class</th><th>Fee</th><th class="num">Net</th><th class="num">Paid</th><th class="num">Balance</th><th>Due</th><th>Status</th></tr></thead><tbody>
+      ${rows.length ? `<div class="table-wrap"><table><thead><tr><th>Student</th><th>Class</th><th>Fee</th><th class="num">Net</th><th class="num">Paid</th><th class="num">Balance</th><th>Status</th></tr></thead><tbody>
         ${rows.map(({fee:f,calc:c}) => { const s = studentById(f.studentId); return `<tr>
           <td>${esc(studentName(f.studentId))}</td><td>${s?esc(s.class)+(s.section?('-'+esc(s.section)):''):'\u2014'}</td>
           <td>${esc(f.type)}</td><td class="num">${money(c.net)}</td><td class="num">${money(c.paid)}</td>
-          <td class="num">${money(c.balance)}</td><td>${fmtDate(f.dueDate)}</td><td>${tagForStatus(c.status)}</td>
+          <td class="num">${money(c.balance)}</td><td>${tagForStatus(c.status)}</td>
         </tr>`; }).join('')}
       </tbody></table></div>` : `<div class="empty-state">${ICONS.empty}<h3>Nothing pending</h3><p>Every fee record is fully paid.</p></div>`}
     </div></div>`;
@@ -1427,10 +1723,204 @@ function paintReportBody(){
     const keys = Object.keys(groups).sort();
     el.innerHTML = keys.map(k => `
       <div class="panel"><div class="panel-head"><h3>${esc(k)}</h3><div class="sub">${groups[k].length} student(s)</div></div>
-      <div class="panel-body pad0"><div class="table-wrap"><table><thead><tr><th>Admission No.</th><th>Name</th><th>Father's name</th><th>Phone</th><th>Status</th></tr></thead><tbody>
-        ${groups[k].map(s => `<tr><td>${esc(s.id)}</td><td>${esc(s.name)}</td><td>${esc(s.fatherName)}</td><td>${esc(s.phone)}</td><td><span class="tag ${s.status==='Active'?'tag-active':'tag-inactive'}">${s.status}</span></td></tr>`).join('')}
+      <div class="panel-body pad0"><div class="table-wrap"><table><thead><tr><th>Admission No.</th><th>Name</th><th>Father's name</th><th>Phone</th></tr></thead><tbody>
+        ${groups[k].map(s => `<tr><td>${esc(s.id)}</td><td>${esc(s.name)}</td><td>${esc(s.fatherName)}</td><td>${esc(s.phone)}</td></tr>`).join('')}
       </tbody></table></div></div></div>`).join('') || `<div class="empty-state">${ICONS.empty}<h3>No students yet</h3></div>`;
   }
+}
+
+/* ---------------------------------------------------------------
+   Notifications — sends fee reminders and announcements that show
+   up in the separate Parent Portal app (parent-app/). Requires
+   cloud sync to be on and signed in, since that's the only channel
+   parents' devices share with this one. See README.md > "Parent
+   Portal" for the Firestore collection and security rules this
+   needs.
+   --------------------------------------------------------------- */
+let notifHistoryUnsub = null;
+
+function renderNotifications(){
+  setTopbar('Notifications', 'Send fee reminders and announcements to the Parent Portal app');
+  if(!cloudDocRef){
+    setContent(`<div class="empty-state">${ICONS.bell}<h3>Cloud sync required</h3><p>Parent notifications are delivered through cloud sync. Turn it on and sign in first \u2014 see firebase-config.js and Settings.</p></div>`);
+    return;
+  }
+  const classes = [...new Set(DB.students.map(s => s.class).filter(Boolean))].sort();
+  setContent(`
+    <div class="panel">
+      <div class="panel-body">
+        <div class="section-title" style="margin-top:0;">Send a notice</div>
+        <div class="field-row">
+          <div class="field"><label>Type</label>
+            <select id="n_kind">
+              <option value="announcement">General announcement</option>
+              <option value="fee_reminder">Fee reminder</option>
+            </select>
+          </div>
+          <div class="field"><label>Audience</label>
+            <select id="n_audienceType">
+              <option value="all">All parents</option>
+              <option value="class">Specific class</option>
+              <option value="student">Specific student</option>
+            </select>
+          </div>
+        </div>
+        <div class="field" id="n_classWrap" style="display:none;">
+          <label>Class</label>
+          <select id="n_class">${classes.map(c => `<option value="${esc(c)}">Class ${esc(c)}</option>`).join('')}</select>
+        </div>
+        <div class="field" id="n_studentWrap" style="display:none;">
+          <label>Student</label>
+          <div class="searchable-select">
+            <input type="text" id="n_studentInput" placeholder="Search by name or admission no." autocomplete="off">
+            <input type="hidden" id="n_student">
+            <div class="searchable-select-list" id="n_studentList"></div>
+          </div>
+        </div>
+        <div class="field"><label>Title</label><input type="text" id="n_title" placeholder="e.g. Fee reminder \u2014 Term 2"></div>
+        <div class="field"><label>Message</label><textarea id="n_message" rows="4" placeholder="Write your message..."></textarea></div>
+        <p class="small-note" id="n_preview" style="margin-bottom:12px;"></p>
+        <button class="btn btn-primary" id="btnSendNotif">${ICONS.bell}Send notice</button>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><div><h3>Recently sent</h3><div class="sub">Newest first, visible to parents in the app</div></div></div>
+      <div class="panel-body pad0" id="notifHistory"><div class="empty-state">${ICONS.empty}<p>Loading\u2026</p></div></div>
+    </div>
+  `);
+  wireNotificationComposer();
+  loadNotificationHistory();
+}
+
+function resolveNotifAudience(){
+  const kind = document.getElementById('n_kind').value;
+  const audType = document.getElementById('n_audienceType').value;
+  let candidates;
+  if(audType === 'all') candidates = DB.students.slice();
+  else if(audType === 'class'){
+    const cls = document.getElementById('n_class').value;
+    candidates = DB.students.filter(s => s.class === cls);
+  }else{
+    const sid = document.getElementById('n_student').value;
+    candidates = DB.students.filter(s => s.id === sid);
+  }
+  if(kind === 'fee_reminder' && audType !== 'student'){
+    candidates = candidates.filter(s => feesForStudent(s.id).reduce((sum,f) => sum + computeFee(f).balance, 0) > 0);
+  }
+  return { kind, audType, candidates };
+}
+
+function wireNotificationComposer(){
+  const kindSel = document.getElementById('n_kind');
+  const audSel = document.getElementById('n_audienceType');
+  const classWrap = document.getElementById('n_classWrap');
+  const studentWrap = document.getElementById('n_studentWrap');
+  const classSel = document.getElementById('n_class');
+  const titleInput = document.getElementById('n_title');
+  const msgInput = document.getElementById('n_message');
+  const preview = document.getElementById('n_preview');
+
+  const items = DB.students.map(s => ({
+    value: s.id, label: `${s.name} (Admission No. ${s.id})`,
+    sub: `Class ${s.class}${s.section ? '-' + s.section : ''}`,
+    searchText: `${s.name} ${s.id}`.toLowerCase()
+  }));
+  initSearchableSelect('n_studentInput', 'n_studentList', 'n_student', items, { onSelect: updatePreview });
+
+  function applyTemplate(){
+    if(kindSel.value === 'fee_reminder' && !titleInput.dataset.touched){
+      titleInput.value = 'Fee reminder';
+      msgInput.value = 'Dear Parent,\n\nThis is a reminder that a balance remains on your child\u2019s school fees. Kindly visit the school office to clear the pending amount at your earliest convenience.\n\nThank you.';
+    }
+  }
+  function updatePreview(){
+    const { kind, candidates } = resolveNotifAudience();
+    if(kind === 'fee_reminder'){
+      const total = candidates.reduce((sum,s) => sum + feesForStudent(s.id).reduce((a,f) => a + computeFee(f).balance, 0), 0);
+      preview.textContent = candidates.length
+        ? `Will notify ${candidates.length} parent(s), covering ${money(total)} outstanding.`
+        : 'No students in this selection currently have a pending balance.';
+    }else{
+      preview.textContent = candidates.length ? `Will notify ${candidates.length} parent(s).` : 'Choose a student to notify.';
+    }
+  }
+  function updateVisibility(){
+    classWrap.style.display = audSel.value === 'class' ? 'block' : 'none';
+    studentWrap.style.display = audSel.value === 'student' ? 'block' : 'none';
+    updatePreview();
+  }
+
+  titleInput.addEventListener('input', () => { titleInput.dataset.touched = '1'; });
+  kindSel.addEventListener('change', () => { applyTemplate(); updatePreview(); });
+  audSel.addEventListener('change', updateVisibility);
+  classSel.addEventListener('change', updatePreview);
+  document.getElementById('btnSendNotif').addEventListener('click', sendNotification);
+  updateVisibility();
+}
+
+function sendNotification(){
+  const title = document.getElementById('n_title').value.trim();
+  const message = document.getElementById('n_message').value.trim();
+  if(!title || !message){ toast('Enter a title and message.', true); return; }
+  const { kind, audType, candidates } = resolveNotifAudience();
+  if(!candidates.length){
+    toast(kind === 'fee_reminder' ? 'No students in this selection currently have a pending balance.' : 'Choose a student.', true);
+    return;
+  }
+  const audience = kind === 'fee_reminder'
+    ? { type:'students', ids: candidates.map(s => s.id) }
+    : audType === 'all' ? { type:'all' }
+    : audType === 'class' ? { type:'class', class: document.getElementById('n_class').value }
+    : { type:'students', ids: candidates.map(s => s.id) };
+  const totalOutstanding = kind === 'fee_reminder'
+    ? candidates.reduce((sum,s) => sum + feesForStudent(s.id).reduce((a,f) => a + computeFee(f).balance, 0), 0)
+    : null;
+
+  openModal({
+    title: 'Send this notice?',
+    body: `<p>This will be sent to <b>${candidates.length}</b> ${candidates.length === 1 ? 'parent' : 'parents'}${totalOutstanding != null ? `, covering a total outstanding of <b>${money(totalOutstanding)}</b>` : ''}.</p>
+           <p class="small-note" style="margin-top:10px;"><b>${esc(title)}</b><br>${esc(message)}</p>`,
+    confirmLabel: 'Send now',
+    onConfirm: () => {
+      firebase.firestore().collection('notifications').add({
+        kind, audience, title, message,
+        recipientCount: candidates.length,
+        totalOutstanding,
+        createdAt: Date.now(),
+        createdBy: (cloudUser && cloudUser.email) || 'unknown'
+      }).then(() => { toast('Notice sent.'); renderNotifications(); })
+        .catch(err => { console.error('Send failed', err); toast('Could not send \u2014 check your connection.', true); });
+      return true;
+    }
+  });
+}
+
+function audienceLabel(aud){
+  if(!aud || aud.type === 'all') return 'All parents';
+  if(aud.type === 'class') return `Class ${aud.class}`;
+  if(aud.type === 'students') return `${(aud.ids||[]).length} student(s)`;
+  return '';
+}
+
+function loadNotificationHistory(){
+  if(notifHistoryUnsub){ notifHistoryUnsub(); notifHistoryUnsub = null; }
+  notifHistoryUnsub = firebase.firestore().collection('notifications').orderBy('createdAt','desc').limit(20)
+    .onSnapshot(snap => {
+      const target = document.getElementById('notifHistory');
+      if(!target) return;
+      const docs = snap.docs.map(d => d.data());
+      target.innerHTML = docs.length ? `<div class="notif-history">${docs.map(n => `
+        <div class="notif-history-row">
+          <div class="nh-top">
+            <span class="tag ${n.kind==='fee_reminder' ? 'tag-partial' : 'tag-paid'}">${n.kind==='fee_reminder' ? 'Fee reminder' : 'Announcement'}</span>
+            <span class="nh-time">${n.createdAt ? new Date(n.createdAt).toLocaleString('en-IN') : ''}</span>
+          </div>
+          <div class="nh-title">${esc(n.title||'')}</div>
+          <div class="nh-msg">${esc(n.message||'')}</div>
+          <div class="nh-meta">${esc(audienceLabel(n.audience))} \u00b7 ${n.recipientCount||0} recipient(s)${n.totalOutstanding!=null ? ` \u00b7 ${money(n.totalOutstanding)} outstanding` : ''}</div>
+        </div>`).join('')}</div>`
+        : `<div class="empty-state">${ICONS.empty}<p>No notices sent yet.</p></div>`;
+    }, err => console.error('Notification history listener error', err));
 }
 
 /* ---------------------------------------------------------------
@@ -1456,6 +1946,7 @@ function renderSettings(){
         <div class="field"><label>School name</label><input type="text" id="s_name" value="${esc(DB.school.name)}"></div>
         <div class="field"><label>Address</label><input type="text" id="s_address" value="${esc(DB.school.address)}"></div>
         <div class="field"><label>Phone</label><input type="text" id="s_phone" value="${esc(DB.school.phone)}"></div>
+        <div class="field"><label>Country code (for WhatsApp/SMS to parents)</label><input type="text" id="s_countryCode" value="${esc(DB.school.countryCode)}" placeholder="91" style="max-width:120px;"></div>
         <button class="btn btn-primary" id="btnSaveSchool">Save details</button>
       </div>
     </div>
@@ -1532,6 +2023,7 @@ function renderSettings(){
     DB.school.name = document.getElementById('s_name').value.trim() || DB.school.name;
     DB.school.address = document.getElementById('s_address').value.trim();
     DB.school.phone = document.getElementById('s_phone').value.trim();
+    DB.school.countryCode = document.getElementById('s_countryCode').value.replace(/\D/g,'').trim() || '91';
     saveDB();
     renderShell();
     applyBranding();
@@ -1718,26 +2210,35 @@ function initSearchableSelect(inputId, listId, hiddenId, items, opts){
   }
 }
 
-function openModal({ title, body, confirmLabel, onConfirm, danger }){
+function openModal({ title, body, confirmLabel, onConfirm, danger, extraButtons }){
   const overlay = document.getElementById('modalRoot');
+  const extraHtml = (extraButtons || []).map((b, i) => `<button class="btn ${b.className||''}" id="modalExtraBtn${i}">${b.icon||''}${esc(b.label)}</button>`).join('');
   overlay.innerHTML = `
     <div class="modal-overlay" id="modalOverlay">
       <div class="modal">
         <div class="modal-head"><h3>${esc(title)}</h3><button class="modal-close" id="modalCloseBtn" aria-label="Close">${ICONS.x}</button></div>
         <div class="modal-body">${body}</div>
         <div class="modal-foot">
-          <button class="btn" id="modalCancelBtn">Cancel</button>
-          <button class="btn ${danger?'btn-danger':'btn-primary'}" id="modalConfirmBtn">${esc(confirmLabel)}</button>
+          ${extraHtml}
+          ${extraButtons ? '' : `<button class="btn" id="modalCancelBtn">Cancel</button>`}
+          <button class="btn ${danger?'btn-danger':'btn-primary'}" id="modalConfirmBtn" style="margin-left:${extraButtons?'auto':'0'};">${esc(confirmLabel)}</button>
         </div>
       </div>
     </div>
   `;
   const close = () => { overlay.innerHTML = ''; };
   document.getElementById('modalCloseBtn').addEventListener('click', close);
-  document.getElementById('modalCancelBtn').addEventListener('click', close);
+  const cancelBtn = document.getElementById('modalCancelBtn');
+  if(cancelBtn) cancelBtn.addEventListener('click', close);
   document.getElementById('modalOverlay').addEventListener('click', (e) => { if(e.target.id === 'modalOverlay') close(); });
   document.getElementById('modalConfirmBtn').addEventListener('click', () => {
     const ok = onConfirm();
     if(ok !== false) close();
+  });
+  (extraButtons || []).forEach((b, i) => {
+    document.getElementById(`modalExtraBtn${i}`).addEventListener('click', () => {
+      b.onClick();
+      if(b.closeAfter) close();
+    });
   });
 }
