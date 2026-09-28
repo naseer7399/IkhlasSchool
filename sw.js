@@ -3,7 +3,7 @@
 // once it has been loaded at least once. Data itself is stored via
 // localStorage (or Firestore if cloud sync is enabled), not here.
 
-const CACHE_NAME = 'ikhlas-school-manager-v2';
+const CACHE_NAME = 'ikhlas-school-manager-v3';
 const APP_SHELL = [
   './',
   './index.html',
