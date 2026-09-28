@@ -486,3 +486,16 @@ td.num, th.num{ text-align: right; font-variant-numeric: tabular-nums; }
 .nh-title{ font-weight: 600; font-size: 13.5px; margin-bottom: 2px; }
 .nh-msg{ font-size: 13px; color: var(--ink-soft); white-space: pre-wrap; margin-bottom: 6px; }
 .nh-meta{ font-size: 11.5px; color: var(--ink-faint); }
+
+/* Deleted students (Fees, Payments, Dashboard, Reports) */
+.deleted-student{ color: var(--danger); font-weight: 600; }
+
+/* Notifications: select & clear */
+.nh-actions{ display:flex; align-items:center; gap:8px; margin-left:auto; flex-wrap:wrap; justify-content:flex-end; }
+.nh-actions .btn[disabled]{ opacity:.45; cursor:not-allowed; }
+.notif-history-row{ display:flex; gap:12px; align-items:flex-start; }
+.notif-history-row .nh-main{ flex:1; min-width:0; }
+.notif-history-row.selectable{ cursor:pointer; }
+.notif-history-row.selectable:hover{ background: var(--surface-sunk); }
+.notif-history-row.selected{ background: var(--primary-tint); }
+.nh-check{ width:18px; height:18px; margin-top:2px; flex:none; accent-color: var(--primary); pointer-events:none; }
