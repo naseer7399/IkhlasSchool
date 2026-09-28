@@ -201,6 +201,13 @@ function backfillDB(data){
   if(typeof data.alertSettings.desktopPopups === 'undefined') data.alertSettings.desktopPopups = true;
   if(typeof data.alertSettings.lastBiweeklyDigestAt === 'undefined') data.alertSettings.lastBiweeklyDigestAt = 0;
   if(!Array.isArray(data.alertLog)) data.alertLog = [];
+  if(!data.deletedStudents || typeof data.deletedStudents !== 'object') data.deletedStudents = {};
+  // Recover names of students deleted before this archive existed, from the alert log.
+  data.alertLog.forEach(a => {
+    if(a.type !== 'studentDeleted') return;
+    const m = String(a.message || '').match(/^(.*) \(Admission No\. (.+?)\) was permanently deleted\./);
+    if(m && !data.deletedStudents[m[2]]) data.deletedStudents[m[2]] = { name: m[1], class: '', section: '' };
+  });
   return data;
 }
 function loadDB(){
@@ -376,7 +383,23 @@ function nextId(prefix, list, pad){
 }
 function studentName(id){
   const s = DB.students.find(x => x.id === id);
-  return s ? s.name : '(deleted student)';
+  if(s) return s.name;
+  const d = DB.deletedStudents && DB.deletedStudents[id];
+  return d && d.name ? d.name : '(deleted student)';
+}
+// HTML version for table cells: deleted students show in red.
+function studentNameHTML(id){
+  const s = DB.students.find(x => x.id === id);
+  if(s) return esc(s.name);
+  const d = DB.deletedStudents && DB.deletedStudents[id];
+  const label = d && d.name ? d.name : 'Deleted student';
+  return `<span class="deleted-student" title="This student has been deleted">${esc(label)}</span>`;
+}
+function studentClassLabel(id){
+  const s = DB.students.find(x => x.id === id);
+  const d = s || (DB.deletedStudents && DB.deletedStudents[id]);
+  if(!d || !d.class) return '\u2014';
+  return esc(d.class) + (d.section ? '-' + esc(d.section) : '');
 }
 function studentById(id){ return DB.students.find(x => x.id === id); }
 function feeById(id){ return DB.fees.find(x => x.id === id); }
@@ -699,7 +722,7 @@ function renderDashboard(){
             <button class="btn btn-sm" data-nav="reports">${ICONS.reports}View reports</button></div>
           <div class="panel-body pad0">
             ${attention.length ? `<div class="table-wrap"><table><thead><tr><th>Student</th><th>Fee</th><th class="num">Balance</th><th>Status</th></tr></thead><tbody>
-              ${attention.map(x => `<tr><td>${esc(studentName(x.fee.studentId))}</td><td>${esc(x.fee.type)}</td><td class="num">${money(x.calc.balance)}</td><td>${tagForStatus(x.calc.status)}</td></tr>`).join('')}
+              ${attention.map(x => `<tr><td>${studentNameHTML(x.fee.studentId)}</td><td>${esc(x.fee.type)}</td><td class="num">${money(x.calc.balance)}</td><td>${tagForStatus(x.calc.status)}</td></tr>`).join('')}
             </tbody></table></div>` : `<div class="empty-state">${ICONS.empty}<h3>All fees collected</h3><p>Nothing outstanding right now.</p></div>`}
           </div>
         </div>
@@ -708,7 +731,7 @@ function renderDashboard(){
             <button class="btn btn-sm" data-nav="payments">${ICONS.payments}View payments</button></div>
           <div class="panel-body pad0">
             ${recentPayments.length ? `<div class="table-wrap"><table><thead><tr><th>Date</th><th>Student</th><th class="num">Amount</th></tr></thead><tbody>
-              ${recentPayments.map(p => `<tr><td>${fmtDate(p.date)}</td><td>${esc(studentName(p.studentId))}</td><td class="num">${money(p.amount)}</td></tr>`).join('')}
+              ${recentPayments.map(p => `<tr><td>${fmtDate(p.date)}</td><td>${studentNameHTML(p.studentId)}</td><td class="num">${money(p.amount)}</td></tr>`).join('')}
             </tbody></table></div>` : `<div class="empty-state">${ICONS.empty}<h3>No payments yet</h3></div>`}
           </div>
         </div>
@@ -958,6 +981,8 @@ function confirmDeleteStudent(id){
     danger: true,
     onConfirm: () => {
       const oldParentDocId = s.dob ? parentDocId(s) : null;
+      if(!DB.deletedStudents) DB.deletedStudents = {};
+      DB.deletedStudents[id] = { name: s.name, class: s.class || '', section: s.section || '' };
       DB.students = DB.students.filter(x => x.id !== id);
       saveDB();
       if(oldParentDocId) deleteParentDoc(oldParentDocId);
@@ -1096,10 +1121,11 @@ function renderFeesTable(){
   const area = document.getElementById('feesTableArea');
   if(!area) return;
   area.innerHTML = list.length ? `<div class="table-wrap"><table>
-      <thead><tr><th>Fee ID</th><th>Student</th><th>Type</th><th class="num">Amount</th><th class="num">Discount</th><th class="num">Net</th><th class="num">Balance</th><th>Status</th><th></th></tr></thead>
+      <thead><tr><th>Fee ID</th><th>Student</th><th>Class</th><th>Type</th><th class="num">Amount</th><th class="num">Discount</th><th class="num">Net</th><th class="num">Balance</th><th>Status</th><th></th></tr></thead>
       <tbody>${list.map(({fee:f, calc:c}) => `<tr>
         <td>${esc(f.id)}</td>
-        <td>${esc(studentName(f.studentId))}</td>
+        <td>${studentNameHTML(f.studentId)}</td>
+        <td>${studentClassLabel(f.studentId)}</td>
         <td>${esc(f.type)}</td>
         <td class="num">${money(f.amount)}</td>
         <td class="num">${f.discount ? money(f.discount) : '\u2014'}</td>
@@ -1367,11 +1393,12 @@ function renderPaymentsTable(){
   const area = document.getElementById('paymentsTableArea');
   if(!area) return;
   area.innerHTML = list.length ? `<div class="table-wrap"><table>
-      <thead><tr><th>Receipt</th><th>Date</th><th>Student</th><th>Fee</th><th class="num">Amount paid</th><th>Method</th><th></th></tr></thead>
+      <thead><tr><th>Receipt</th><th>Date</th><th>Student</th><th>Class</th><th>Fee</th><th class="num">Amount paid</th><th>Method</th><th></th></tr></thead>
       <tbody>${list.map(p => { const f = feeById(p.feeId); return `<tr>
         <td>${esc(p.receipt)}</td>
         <td>${fmtDate(p.date)}</td>
-        <td>${esc(studentName(p.studentId))}</td>
+        <td>${studentNameHTML(p.studentId)}</td>
+        <td>${studentClassLabel(p.studentId)}</td>
         <td>${f ? esc(f.type) : '\u2014'}</td>
         <td class="num">${money(p.amount)}</td>
         <td>${esc(p.method)}</td>
@@ -1808,7 +1835,7 @@ function paintReportBody(){
     el.innerHTML = `<div class="panel"><div class="panel-body pad0">
       ${rows.length ? `<div class="table-wrap"><table><thead><tr><th>Student</th><th>Class</th><th>Fee</th><th class="num">Net</th><th class="num">Paid</th><th class="num">Balance</th><th>Status</th></tr></thead><tbody>
         ${rows.map(({fee:f,calc:c}) => { const s = studentById(f.studentId); return `<tr>
-          <td>${esc(studentName(f.studentId))}</td><td>${s?esc(s.class)+(s.section?('-'+esc(s.section)):''):'\u2014'}</td>
+          <td>${studentNameHTML(f.studentId)}</td><td>${studentClassLabel(f.studentId)}</td>
           <td>${esc(f.type)}</td><td class="num">${money(c.net)}</td><td class="num">${money(c.paid)}</td>
           <td class="num">${money(c.balance)}</td><td>${tagForStatus(c.status)}</td>
         </tr>`; }).join('')}
@@ -1826,7 +1853,7 @@ function paintReportBody(){
       </div></div>
       <div class="panel"><div class="panel-head"><h3>All payments</h3></div><div class="panel-body pad0">
         <div class="table-wrap"><table><thead><tr><th>Receipt</th><th>Date</th><th>Student</th><th>Method</th><th class="num">Amount</th></tr></thead><tbody>
-          ${[...DB.payments].sort((a,b)=>b.date.localeCompare(a.date)).map(p=>`<tr><td>${esc(p.receipt)}</td><td>${fmtDate(p.date)}</td><td>${esc(studentName(p.studentId))}</td><td>${esc(p.method)}</td><td class="num">${money(p.amount)}</td></tr>`).join('')}
+          ${[...DB.payments].sort((a,b)=>b.date.localeCompare(a.date)).map(p=>`<tr><td>${esc(p.receipt)}</td><td>${fmtDate(p.date)}</td><td>${studentNameHTML(p.studentId)}</td><td>${esc(p.method)}</td><td class="num">${money(p.amount)}</td></tr>`).join('')}
         </tbody></table></div>
       </div></div>`;
   }else if(reportTab === 'discount'){
@@ -1836,7 +1863,7 @@ function paintReportBody(){
       <div class="stat-grid"><div class="stat-card accent"><div class="label">Total discount given</div><div class="value">${money(total)}</div><div class="foot">${rows.length} special-case fee record(s)</div></div></div>
       <div class="panel"><div class="panel-body pad0">
         ${rows.length ? `<div class="table-wrap"><table><thead><tr><th>Student</th><th>Fee type</th><th class="num">Original amount</th><th class="num">Discount</th><th>Reason</th></tr></thead><tbody>
-          ${rows.map(f => `<tr><td>${esc(studentName(f.studentId))}</td><td>${esc(f.type)}</td><td class="num">${money(f.amount)}</td><td class="num">${money(f.discount)}</td><td>${esc(f.discountReason)||'\u2014'}</td></tr>`).join('')}
+          ${rows.map(f => `<tr><td>${studentNameHTML(f.studentId)}</td><td>${esc(f.type)}</td><td class="num">${money(f.amount)}</td><td class="num">${money(f.discount)}</td><td>${esc(f.discountReason)||'\u2014'}</td></tr>`).join('')}
         </tbody></table></div>` : `<div class="empty-state">${ICONS.empty}<h3>No discounts recorded</h3></div>`}
       </div></div>`;
   }else if(reportTab === 'classlist'){
@@ -1860,6 +1887,9 @@ function paintReportBody(){
    needs.
    --------------------------------------------------------------- */
 let notifHistoryUnsub = null;
+let notifHistoryDocs = [];
+let notifSelectMode = false;
+let notifSelected = new Set();
 
 function renderNotifications(){
   setTopbar('Notifications', 'Send fee reminders and announcements to the Parent Portal app');
@@ -1906,10 +1936,12 @@ function renderNotifications(){
       </div>
     </div>
     <div class="panel">
-      <div class="panel-head"><div><h3>Recently sent</h3><div class="sub">Newest first, visible to parents in the app</div></div></div>
+      <div class="panel-head"><div><h3>Recently sent</h3><div class="sub">Newest first, visible to parents in the app</div></div>
+        <div class="nh-actions" id="notifHistoryActions"></div></div>
       <div class="panel-body pad0" id="notifHistory"><div class="empty-state">${ICONS.empty}<p>Loading\u2026</p></div></div>
     </div>
   `);
+  notifSelectMode = false; notifSelected = new Set(); notifHistoryDocs = [];
   wireNotificationComposer();
   loadNotificationHistory();
 }
@@ -2028,21 +2060,86 @@ function loadNotificationHistory(){
   if(notifHistoryUnsub){ notifHistoryUnsub(); notifHistoryUnsub = null; }
   notifHistoryUnsub = firebase.firestore().collection('notifications').orderBy('createdAt','desc').limit(20)
     .onSnapshot(snap => {
-      const target = document.getElementById('notifHistory');
-      if(!target) return;
-      const docs = snap.docs.map(d => d.data());
-      target.innerHTML = docs.length ? `<div class="notif-history">${docs.map(n => `
-        <div class="notif-history-row">
-          <div class="nh-top">
-            <span class="tag ${n.kind==='fee_reminder' ? 'tag-partial' : 'tag-paid'}">${n.kind==='fee_reminder' ? 'Fee reminder' : 'Announcement'}</span>
-            <span class="nh-time">${n.createdAt ? new Date(n.createdAt).toLocaleString('en-IN') : ''}</span>
-          </div>
-          <div class="nh-title">${esc(n.title||'')}</div>
-          <div class="nh-msg">${esc(n.message||'')}</div>
-          <div class="nh-meta">${esc(audienceLabel(n.audience))} \u00b7 ${n.recipientCount||0} recipient(s)${n.totalOutstanding!=null ? ` \u00b7 ${money(n.totalOutstanding)} outstanding` : ''}</div>
-        </div>`).join('')}</div>`
-        : `<div class="empty-state">${ICONS.empty}<p>No notices sent yet.</p></div>`;
+      notifHistoryDocs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      const ids = new Set(notifHistoryDocs.map(n => n.id));
+      notifSelected = new Set([...notifSelected].filter(id => ids.has(id)));
+      if(!notifHistoryDocs.length) notifSelectMode = false;
+      renderNotificationHistory();
     }, err => console.error('Notification history listener error', err));
+}
+
+function renderNotificationHistory(){
+  const target = document.getElementById('notifHistory');
+  const actions = document.getElementById('notifHistoryActions');
+  if(!target) return;
+  const docs = notifHistoryDocs;
+
+  if(actions){
+    if(!docs.length) actions.innerHTML = '';
+    else if(!notifSelectMode) actions.innerHTML = `<button class="btn btn-sm" id="nhSelect">Select</button>`;
+    else {
+      const n = notifSelected.size;
+      actions.innerHTML = `
+        <button class="btn btn-sm" id="nhAll">${n === docs.length ? 'Deselect all' : 'Select all'}</button>
+        <button class="btn btn-sm btn-danger" id="nhClear" ${n ? '' : 'disabled'}>${ICONS.trash}Clear${n ? ' (' + n + ')' : ''}</button>
+        <button class="btn btn-sm btn-ghost" id="nhCancel">Cancel</button>`;
+    }
+    const on = (id, fn) => { const el = document.getElementById(id); if(el) el.addEventListener('click', fn); };
+    on('nhSelect', () => { notifSelectMode = true; notifSelected = new Set(); renderNotificationHistory(); });
+    on('nhCancel', () => { notifSelectMode = false; notifSelected = new Set(); renderNotificationHistory(); });
+    on('nhAll', () => {
+      notifSelected = notifSelected.size === docs.length ? new Set() : new Set(docs.map(n => n.id));
+      renderNotificationHistory();
+    });
+    on('nhClear', confirmClearSelectedNotifications);
+  }
+
+  target.innerHTML = docs.length ? `<div class="notif-history">${docs.map(n => `
+    <div class="notif-history-row ${notifSelectMode ? 'selectable' : ''} ${notifSelected.has(n.id) ? 'selected' : ''}" data-nid="${esc(n.id)}">
+      ${notifSelectMode ? `<input type="checkbox" class="nh-check" aria-label="Select notice" ${notifSelected.has(n.id) ? 'checked' : ''}>` : ''}
+      <div class="nh-main">
+        <div class="nh-top">
+          <span class="tag ${n.kind==='fee_reminder' ? 'tag-partial' : 'tag-paid'}">${n.kind==='fee_reminder' ? 'Fee reminder' : 'Announcement'}</span>
+          <span class="nh-time">${n.createdAt ? new Date(n.createdAt).toLocaleString('en-IN') : ''}</span>
+        </div>
+        <div class="nh-title">${esc(n.title||'')}</div>
+        <div class="nh-msg">${esc(n.message||'')}</div>
+        <div class="nh-meta">${esc(audienceLabel(n.audience))} \u00b7 ${n.recipientCount||0} recipient(s)${n.totalOutstanding!=null ? ` \u00b7 ${money(n.totalOutstanding)} outstanding` : ''}</div>
+      </div>
+    </div>`).join('')}</div>`
+    : `<div class="empty-state">${ICONS.empty}<p>No notices sent yet.</p></div>`;
+
+  if(notifSelectMode){
+    target.querySelectorAll('.notif-history-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const id = row.dataset.nid;
+        if(notifSelected.has(id)) notifSelected.delete(id); else notifSelected.add(id);
+        renderNotificationHistory();
+      });
+    });
+  }
+}
+
+function confirmClearSelectedNotifications(){
+  const ids = [...notifSelected];
+  if(!ids.length) return;
+  openModal({
+    title: ids.length === 1 ? 'Clear this notice?' : `Clear ${ids.length} notices?`,
+    body: `<div class="modal-note danger">${ICONS.alert}${ids.length === 1 ? 'This notice' : 'These notices'} will be permanently deleted and will disappear from the Parent Portal app for every parent who received ${ids.length === 1 ? 'it' : 'them'}.</div>`,
+    confirmLabel: 'Clear',
+    danger: true,
+    onConfirm: () => {
+      const db = firebase.firestore();
+      const batch = db.batch();
+      ids.forEach(id => batch.delete(db.collection('notifications').doc(id)));
+      batch.commit()
+        .then(() => { toast(ids.length === 1 ? 'Notice cleared.' : `${ids.length} notices cleared.`); })
+        .catch(err => { console.error('Clear failed', err); toast('Could not clear \u2014 check your connection.', true); });
+      notifSelectMode = false; notifSelected = new Set();
+      renderNotificationHistory();
+      return true;
+    }
+  });
 }
 
 /* ---------------------------------------------------------------
