@@ -790,14 +790,14 @@ function renderStudents(){
 // Renders the search/filter toolbar once. The input elements are never
 // recreated after this, so typing doesn't lose focus or cursor position.
 function renderStudentsShell(){
-  const classes = [...new Set(DB.students.map(s => s.class))].sort((a,b)=>Number(a)-Number(b));
+  const classes = [...new Set(DB.students.map(s => String(s.class == null ? '' : s.class).trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b, undefined, { numeric:true })); // blank classes ignored
   const canAdd = can('add-students');
   setContent(`
     <div class="panel">
       <div class="panel-head">
         <div class="toolbar">
           <div class="search-input">${ICONS.search}<input type="text" id="studentSearch" placeholder="Search by name or admission no." value="${esc(studentFilter.q)}" style="width:240px"></div>
-          <select id="filterClass" style="width:140px"><option value="">All classes</option>${classes.map(c=>`<option ${studentFilter.class===c?'selected':''} value="${c}">Class ${c}</option>`).join('')}</select>
+          <select id="filterClass" style="width:140px"><option value="">All classes</option>${classes.map(c=>`<option ${studentFilter.class===c?'selected':''} value="${esc(c)}">Class ${esc(c)}</option>`).join('')}</select>
         </div>
         <button class="btn" id="btnPrintStudents">${ICONS.print}Print</button>
         <button class="btn" id="btnAnnouncement">${ICONS.megaphone}Announcement</button>
@@ -1030,7 +1030,7 @@ function renderStudentProfile(){
           <div class="item"><div class="k">Admission No.</div><div class="v">${esc(s.id)}</div></div>
           <div class="item"><div class="k">Student's Aadhaar</div><div class="v">${esc(s.studentAadhar)||'\u2014'}</div></div>
           <div class="item"><div class="k">Phone</div><div class="v">${esc(s.phone)||'\u2014'}</div></div>
-          <div class="item"><div class="k">Section</div><div class="v">${esc(s.section)||'\u2014'}</div></div>
+          <div class="item"><div class="k">Class &amp; Section</div><div class="v">${s.class ? (esc(s.class) + (s.section ? '-' + esc(s.section) : '')) : '\u2014'}</div></div>
           <div class="item"><div class="k">Father's name</div><div class="v">${esc(s.fatherName)||'\u2014'}</div></div>
           <div class="item"><div class="k">Father's Aadhaar</div><div class="v">${esc(s.fatherAadhar)||'\u2014'}</div></div>
           <div class="item"><div class="k">Mother's name</div><div class="v">${esc(s.motherName)||'\u2014'}</div></div>
@@ -1163,7 +1163,7 @@ function openIndividualMessageModal(studentId){
 }
 
 function openAnnouncementModal(){
-  const classes = [...new Set(DB.students.map(s => s.class))].sort((a,b)=>Number(a)-Number(b));
+  const classes = [...new Set(DB.students.map(s => String(s.class == null ? '' : s.class).trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b, undefined, { numeric:true })); // blank classes ignored
   const rowsHtml = DB.students.map(s => `
     <label style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid var(--line);">
       <input type="checkbox" class="ann-check" value="${esc(s.id)}" data-class="${esc(s.class)}" checked>
