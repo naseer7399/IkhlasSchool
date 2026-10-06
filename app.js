@@ -34,6 +34,7 @@ const ICONS = {
   user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c0-3.6 3.4-6.5 7.5-6.5s7.5 2.9 7.5 6.5"/></svg>',
   empty: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M3 12h18M3 17h11"/></svg>',
   alert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.5 17a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>',
+  info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.8h.01"/></svg>',
   bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 4.5 1.5 6 1.5 6h-15S6 12.5 6 8Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>',
   userPlus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/><path d="M19 8v6M22 11h-6"/></svg>',
   cash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>',
@@ -618,7 +619,9 @@ const NAV_ITEMS = [
   { id:'accounts',  label:'Accounts',  icon:'accounts',   roles:['management'] },
   { id:'reports',   label:'Reports',   icon:'reports',    roles:['management','teacher'] },
   { id:'notifications', label:'Notifications', icon:'bell', roles:['management'] },
-  { id:'settings',  label:'Settings',  icon:'settings',   roles:['management'] }
+  { id:'settings',  label:'Settings',  icon:'settings',   roles:['management'] },
+  // External link: opens the help/about site in a new browser tab (no in-app view).
+  { id:'about', label:'About Software', icon:'info', roles:['management','teacher','feepayments'], href:'https://naseer7399.github.io/IKHLAS-HELP/' }
 ];
 
 function showApp(){
@@ -636,7 +639,9 @@ function renderShell(){
     <div class="badge-mark">${DB.school.logo ? `<img src="${DB.school.logo}" alt="${esc(DB.school.name)} logo">` : 'IS'}</div>
     <div><strong>${esc(DB.school.name)}</strong><span>Student and fee records</span></div>`;
   document.getElementById('navList').innerHTML = items.map(i => `
-    <button class="nav-item" data-tab="${i.id}">${ICONS[i.icon]}<span>${i.label}</span></button>
+    ${i.href
+      ? `<button class="nav-item" type="button" data-href="${i.href}">${ICONS[i.icon]}<span>${i.label}</span></button>`
+      : `<button class="nav-item" data-tab="${i.id}">${ICONS[i.icon]}<span>${i.label}</span></button>`}
   `).join('');
   document.getElementById('sidebarFooter').innerHTML = `
     <div class="role-pill"><span class="dot"></span>${ROLE_LABELS[SESSION.role] || 'Guest'} access</div>
@@ -645,6 +650,9 @@ function renderShell(){
     <div class="app-copyright">\u00a9 2026 Naseer ISM WEB All rights reserved.</div>`;
   document.querySelectorAll('.nav-item[data-tab]').forEach(btn => {
     btn.addEventListener('click', () => navigate(btn.dataset.tab));
+  });
+  document.querySelectorAll('.nav-item[data-href]').forEach(btn => {
+    btn.addEventListener('click', () => window.open(btn.dataset.href, '_blank', 'noopener,noreferrer'));
   });
   document.getElementById('btnLogout').addEventListener('click', logout);
 }
