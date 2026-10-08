@@ -647,7 +647,7 @@ function renderShell(){
     <div class="role-pill"><span class="dot"></span>${ROLE_LABELS[SESSION.role] || 'Guest'} access</div>
     ${cloudDocRef ? `<div class="role-pill" style="background:rgba(255,255,255,0.06);"><span class="dot" style="background:#2F8F5B;"></span>Cloud sync on</div>` : ''}
     <button class="nav-item" id="btnLogout">${ICONS.logout}<span>Log out</span></button>
-    <div class="app-copyright">\u00a9 2026 Naseer ISM WEB All rights reserved.</div>`;
+    <div class="app-copyright">\u00a9 2026 Naseer ISM-V1.5&reg; All rights reserved.</div>`;
   document.querySelectorAll('.nav-item[data-tab]').forEach(btn => {
     btn.addEventListener('click', () => navigate(btn.dataset.tab));
   });
